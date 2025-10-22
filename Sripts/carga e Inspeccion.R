@@ -4,6 +4,7 @@ library(tidyverse)
 library(readr)
 
 
+
 #CARGA DE BASES DE DATOS
 encc_22_23_raw <- read_csv("data/raw_data/base-datos-encc-2022-2023.csv")
 
@@ -130,9 +131,10 @@ encc_Final <- encc %>%
     
     # Nivel Educativo
     NIVEL_EDUCATIVO = soc13.1
+    
   )
 
-
+unique(region)
 
 
 
