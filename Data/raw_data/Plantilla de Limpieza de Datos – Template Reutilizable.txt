@@ -1,0 +1,108 @@
+from pathlib import Path
+
+# Contenido del archivo de texto en R
+r_template_text = """
+# 🧹 Plantilla de Limpieza de Datos – Template Reutilizable (R)
+
+# 📂 Nombre del dataset: ______________
+# 📅 Fecha de adquisición: YYYY-MM-DD
+# 🌐 Fuente: ______________
+# 🎯 Objetivo del dataset: ______________________________
+
+# ---------------------------------------------
+# 🧾 Paso 1 – Carga inicial
+
+# Cargar librerías necesarias
+library(tidyverse)
+
+# Leer datos
+df_raw <- read_csv("ruta/del/dataset.csv")
+
+# Copia para limpieza
+df <- df_raw
+
+# ---------------------------------------------
+# 🔍 Paso 2 – Exploración inicial
+
+# Dimensiones
+dim(df)
+
+# Vista previa
+head(df)
+
+# Estructura de columnas
+str(df)
+
+# Resumen estadístico
+summary(df)
+
+# ---------------------------------------------
+# 🚩 Paso 3 – Detección de problemas
+
+# Revisar valores NA
+colSums(is.na(df))
+
+# Revisar duplicados
+sum(duplicated(df))
+
+# ---------------------------------------------
+# 🛠️ Paso 4 – Limpieza de datos
+
+## 4.1 Eliminar o imputar NA
+
+# Eliminar filas con email NA
+df <- df %>% filter(!is.na(email))
+
+# Imputar edad con media
+df$edad[is.na(df$edad)] <- mean(df$edad, na.rm = TRUE)
+
+## 4.2 Eliminar duplicados
+df <- df %>% distinct()
+
+## 4.3 Conversión de tipos
+df$fecha <- as.Date(df$fecha)
+df$ingresos <- as.numeric(df$ingresos)
+
+## 4.4 Normalización de texto
+df$genero <- tolower(trimws(df$genero))
+df$genero <- recode(df$genero,
+                    "m" = "masculino",
+                    "masculino" = "masculino",
+                    "f" = "femenino",
+                    "fem" = "femenino")
+
+## 4.5 Crear columnas nuevas
+df$edad_calc <- as.numeric(format(Sys.Date(), "%Y")) - as.numeric(format(df$fecha_nacimiento, "%Y"))
+
+# ---------------------------------------------
+# ✅ Paso 5 – Verificación final
+
+# Comprobar NA restantes
+colSums(is.na(df))
+
+# Estructura final
+str(df)
+
+# Vista rápida
+head(df)
+
+# ---------------------------------------------
+# 📤 Paso 6 – Exportar datos limpios
+
+write_csv(df, "ruta/output/dataset_clean.csv")
+
+# ---------------------------------------------
+# 📝 Resumen de Cambios
+
+# 1. Eliminación de NA: columnas email, edad
+# 2. Imputación: edad, ingresos
+# 3. Duplicados eliminados
+# 4. Texto normalizado: genero
+# 5. Nuevas columnas: edad_calc
+"""
+
+# Guardar archivo de texto
+file_path = Path("Plantilla_Limpieza_Datos_R.txt")
+file_path.write_text(r_template_text)
+
+print("Archivo 'Plantilla_Limpieza_Datos_R.txt' creado exitosamente.")
