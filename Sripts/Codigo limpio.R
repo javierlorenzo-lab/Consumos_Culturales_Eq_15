@@ -24,7 +24,7 @@ head(encc_22_23_raw)
 # Estructura de columnas
 str(encc_22_23_raw)
 
-#Porblemas
+#Problemas
 
 problems(encc)
 # problemas en la columna 299 (musica14.1)
@@ -39,7 +39,9 @@ encc$musica14.1 <- as.character(encc$musica14.1)
 
 problems(encc)
 
-# 0 prooblemas
+# 0 problemas encontrados
+
+
 
 
 
