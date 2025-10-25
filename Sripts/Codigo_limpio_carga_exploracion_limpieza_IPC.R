@@ -1,6 +1,4 @@
-#----------------------------
-# Carga de librerías
-#----------------------------
+
 library(tidyverse)
 library(readr)
 library(dplyr)
