@@ -2,6 +2,7 @@
 
 library(tidyverse)
 library(readr)
+library(dplyr)
 
 
 
@@ -25,13 +26,11 @@ head(encc_22_23_raw)
 str(encc_22_23_raw)
 
 #Problemas
-
-problems(encc)
+problems(encc_22_23_raw)
 # problemas en la columna 299 (musica14.1)
 names(encc_22_23_raw)[299]
 
 #Posible solucion, forzar a texto
-
 encc <- read_csv("data/raw_data/base-datos-encc-2022-2023.csv", 
                  col_types = cols(musica14.1 = col_character()))
 
@@ -44,7 +43,6 @@ problems(encc)
 #-------------------------------------------------------------------------------------
 
 #Seleccionar  columnas a mantener
-
 columnas_a_mantener <- c(
   # Datos Sociodemográficos
   "region", "localidad", "genero", "edad", "grupos_edad", "nse_3", "expansor", "ponderador",
@@ -91,9 +89,13 @@ columnas_a_mantener <- c(
   "soc13.1"
 )
 
-# 4. Crear el DataFrame final seleccionando SOLO las columnas de interés
+# Agregar dinámicamente todas las columnas que comienzan con "soc"
+cols_soc <- names(df_22_23)[str_detect(names(df_22_23), "^soc")]
+columnas_a_mantener <- unique(c(columnas_a_mantener, cols_soc))
 
-df_tp_final <- encc %>%
+
+# 4. Crear el DataFrame final seleccionando SOLO las columnas de interés
+df_tp_final <- encc_22_23_raw %>%
   select(all_of(columnas_a_mantener)) %>%
   # Renombrar variables para claridad en el análisis grupal
   rename(
@@ -140,8 +142,6 @@ df_tp_final <- encc %>%
   )
 
 # Estructura del DataFrame 
-
-
 df_tp_final %>% glimpse()
 df_tp_final %>% head(10)
 
@@ -150,7 +150,6 @@ df_tp_final %>% head(10)
 
 
 #Grupos Nivel Socio Economico
-
 df_tp_final %>%
   ggplot(aes(x = NSE,  fill = NSE)) +
   geom_bar() +
@@ -161,9 +160,7 @@ df_tp_final %>%
 
 #--------------
 
-df_tp_final%>%
-  group_by("EXPANSOR")
-summarise(n())
+
 
 
 unique(df_tp_final$CINE)
@@ -274,9 +271,12 @@ df_tp_final %>%
 glimpse(df_tp_final)
 
 
-#--------------------------------------------
-#Indice de participacion  Cultural
+
+
+#Proximo--------------------------------------------
+#Calculo de Indice de participacion  Cultural
 #-------------------------------------------
+
 
 
 

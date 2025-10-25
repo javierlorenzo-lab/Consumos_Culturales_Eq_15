@@ -4,7 +4,8 @@ library(tidyverse)
 colnames(encc_Final)
 
 #Nivel Socio Economico NSE
-encc_Final %>% 
+
+df_tp_final %>% 
   ggplot(aes(x = NSE, fill = NSE)) + geom_bar() + theme_minimal()
 
 #Nivel Educativo
@@ -15,7 +16,7 @@ encc_Final %>%
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
 
-encc_Final %>%
+df_tp_final %>%
   ggplot(aes(x = NSE, fill = GENERO)) +
   geom_bar(position = "fill") +
   labs(
@@ -29,7 +30,7 @@ encc_Final %>%
 
 #genero y nivel educativo
 
-encc_Final %>%
+df_tp_final %>%
   ggplot(aes(x = NIVEL_EDUCATIVO, fill = GENERO)) +
   geom_bar(position = "fill") +
   labs(
@@ -45,7 +46,7 @@ encc_Final %>%
 
 
 # Ingresos del hogar según NSE
-encc_Final %>%
+df_tp_final %>%
   ggplot(aes(x = NSE, y = INGRESOS_HOGAR, fill = NSE)) +
   geom_boxplot() +
   labs(title = "Ingresos del hogar por Nivel Socioeconómico",
