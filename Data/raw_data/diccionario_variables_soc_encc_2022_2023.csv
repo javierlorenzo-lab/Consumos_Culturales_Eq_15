@@ -1,0 +1,17 @@
+variable,pregunta,valores_posibles
+soc1_1,Nivel educativo alcanzado (persona entrevistada),1–10 según nivel educativo
+soc1_2,Nivel educativo del principal sostén del hogar,1–10 según nivel educativo
+soc2,Situación laboral del principal sostén del hogar,"1=Trabaja, 2=Jubilado, 3=Desocupado, 4=Otros ingresos, 5=Plan social"
+soc3,Última ocupación del principal sostén del hogar,"1=Ejecutivo, 2=Profesional, 3=Técnico, 4=Empleado, 5=Obrero, 6=Informal"
+soc4,Cobertura médica del principal sostén del hogar,"1=Sí, 0=No"
+soc5,Bienes y servicios en el hogar (Internet),"1=Sí, 0=No"
+soc6,Bienes y servicios en el hogar (Automóvil),"1=Sí, 0=No"
+soc7,Bienes y servicios en el hogar (Tarjeta de crédito),"1=Sí, 0=No"
+soc8,Bienes y servicios en el hogar (Teléfono celular),"1=Sí, 0=No"
+soc9,Bienes y servicios en el hogar (Otros),"1=Sí, 0=No"
+soc10,Tenencia de vivienda,"1=Propia, 2=Alquilada, 3=Prestada, 4=Ocupada, 5=Otra"
+soc11,Dificultad o limitación permanente (algún miembro del hogar),"1=Sí, 0=No"
+soc12,Cobertura médica del encuestado/a,"1=Sí, 0=No"
+soc13.1,Nivel educativo del encuestado/a (variable resumen),1–10 según nivel educativo
+soc14,Cantidad de miembros del hogar,Número entero
+soc15,Condición habitacional / indicador complementario,Categorías de vivienda u otras
