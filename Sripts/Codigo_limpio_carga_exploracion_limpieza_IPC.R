@@ -1,4 +1,3 @@
-
 library(tidyverse)
 library(readr)
 library(dplyr)
@@ -220,7 +219,6 @@ ggplot(df_ipc, aes(x = grupos_edad, y = IPC, fill = NSE)) +
   )
 
 
-library(ggplot2)
 
 # Asegurar que NSE sea categórica
 df_ipc$NSE <- as.factor(df_ipc$NSE)
@@ -272,11 +270,19 @@ df_ipc %>%
 
 
 
-###Modelado
+###Modelados
+
+#IPC ~ NSE
+
+#modelo_ipc_NSE <- lm(IPC ~ NSE, data = df_ipc)
+#summary(modelo_ipc_NSE)
+
+#IPC ~ NSE + GENERO
 
 
 
 
+#IPC ~ NSE + grupos_edad + GENERO
 modelo_ipc <- lm(IPC ~ NSE + grupos_edad + GENERO, data = df_ipc)
 summary(modelo_ipc)
 
