@@ -339,9 +339,6 @@ ggplot(df_res, aes(x = valores_ajustados, y = residuos)) +
   theme_minimal(base_size = 13)
 
 
-library(ggplot2)
-
-library(ggplot2)
 
 # Valores ajustados y residuos
 residuos <- resid(modelo_ipc)
