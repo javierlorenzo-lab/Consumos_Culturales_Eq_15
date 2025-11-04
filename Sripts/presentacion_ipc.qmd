@@ -1,0 +1,92 @@
+---
+  title: "Introducción a Ciencia de Datos – Índice de Participación Cultural (IPC)"
+subtitle: "ENCC 2022/23 – Ministerio de Cultura"
+author: "Javier Lorenzo"
+date: today
+format:
+  revealjs:
+  theme: [simple, metropolis]
+slide-number: true
+transition: fade
+footer: "Fuente: ENCC 2022/23 – Elaboración propia"
+execute:
+  echo: false
+warning: false
+message: false
+---
+  
+  ```{r}
+# Librerías necesarias
+library(tidyverse)
+library(ggplot2)
+
+# Cargar base de datos limpia con IPC
+df <- read_csv("outputs/df_ipc_final.csv")
+
+
+df %>%
+  summarise(
+    Casos = n(),
+    Edad_promedio = round(mean(EDAD, na.rm = TRUE), 1)
+  )
+
+
+# Distribución por región
+
+df %>%
+  count(REGION) %>%
+  ggplot(aes(x = reorder(REGION, n), y = n, fill = REGION)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "Distribución de casos por región", x = "", y = "Frecuencia") +
+  theme_minimal(base_size = 14)
+
+
+
+
+df_long <- df %>%
+  pivot_longer(cols = c(FUE_CINE, LEE_LIBROS, ESCUCHA_MUSICA, FUE_TEATRO, USA_INTERNET),
+               names_to = "actividad", values_to = "respuesta")
+
+df_long %>%
+  filter(respuesta %in% c("SI", "Sí", "Si")) %>%
+  count(actividad) %>%
+  mutate(pct = n / sum(n) * 100) %>%
+  ggplot(aes(x = reorder(actividad, pct), y = pct, fill = actividad)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Participación cultural por tipo de actividad",
+    x = "",
+    y = "% de personas que respondieron 'Sí'"
+  ) +
+  theme_minimal(base_size = 14)
+
+
+
+
+ggplot(df, aes(x = GRUPO_EDAD, y = IPC, fill = NSE)) +
+  geom_boxplot(alpha = 0.6) +
+  labs(
+    title = "Distribución del IPC por grupo de edad y NSE",
+    x = "Grupo de edad",
+    y = "Índice de Participación Cultural"
+  ) +
+  theme_minimal(base_size = 14)
+
+
+
+df %>%
+  group_by(REGION) %>%
+  summarise(IPC_promedio = mean(IPC, na.rm = TRUE)) %>%
+  ggplot(aes(x = reorder(REGION, IPC_promedio), y = IPC_promedio, fill = REGION)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(title = "IPC promedio por región", x = "", y = "IPC promedio") +
+  theme_minimal(base_size = 14)
+
+
+
+
+
+
