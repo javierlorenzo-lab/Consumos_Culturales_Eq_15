@@ -152,8 +152,6 @@ df_tp_final[unlist(cols_por_categoria)] <- lapply(
 )
 
 # Calculo IPC
-
-
 df_ipc <- df_tp_final %>%
   rowwise() %>%
   mutate(
