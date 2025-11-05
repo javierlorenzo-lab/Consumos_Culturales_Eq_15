@@ -64,3 +64,4 @@ ggplot(ipc_region_total, aes(x = GRUPO_EDAD, y = IPC_promedio, group = REGION, c
     plot.subtitle = element_text(hjust = 0.5),
     axis.text.x = element_text(angle = 30, hjust = 1)
   )
+
