@@ -419,3 +419,6 @@ print(p)
 # Guardar directamente en PDF
 ggsave("residuos_ipc_NSE.pdf", plot = p, width = 8, height = 5)
 
+encc_22_23_raw %>% unique(soc13.1)
+
+unique(soc13.1)
