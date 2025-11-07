@@ -3,7 +3,7 @@
 # ENCC 2022/23 – Índice de Participación Cultural (IPC)
 # ============================================================
 
-# ---- 0. Librerías ----
+# - --- 0. Librerías ----
 library(tidyverse)
 library(ggplot2)
 library(scales)
