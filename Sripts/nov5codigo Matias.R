@@ -16,7 +16,7 @@ encc_22_23_raw %>% count(genero)
 encc_22_23_raw <- encc_22_23_raw %>% filter(genero == "Varón" | genero == "Mujer")
 
 
-glimpse(base_datos_encc_2022_2023)
+glimpse("base_datos_encc_2022_2023.csv")
 unique(df_ipc$NSE)
 unique(df_ipc$grupos_edad)
 unique(df_ipc$GENERO)
