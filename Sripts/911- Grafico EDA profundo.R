@@ -249,3 +249,81 @@ g6 <- ggplot(ipc_edad_todas, aes(x = EDAD_ORD, y = IPC_promedio, group = region,
   )
 print(g6)
 
+
+# Carga la librería
+library(ggplot2)
+
+# Asegúrate de que tu dataframe (ej. df_ipc) y tu variable (ej. IPC)
+# tengan los nombres correctos.
+
+ggplot(df_ipc, aes(x = IPC)) +
+  
+  # 1. Dibuja el histograma
+  geom_histogram(
+    aes(y = ..density..), # Esto es clave: normaliza el eje Y para que coincida con la curva
+    bins = 30,           # Puedes cambiar 30 por más o menos barras
+    fill = "skyblue",    # Color de relleno de las barras
+    color = "white"      # Color del borde de las barras
+  ) +
+  
+  # 2. Añade la curva de densidad
+  geom_density(
+    color = "blue",      # Color de la línea
+    fill = "blue",       # Color del sombreado
+    alpha = 0.2          # Transparencia del sombreado
+  ) +
+  
+  # 3. Mejora las etiquetas
+  labs(
+    title = "Distribución del Índice de Participación Cultural (IPC)",
+    x = "Índice de Participación Cultural (1-10)",
+    y = "Densidad"
+  ) +
+  theme_minimal() # Un tema limpio
+
+# Cargar las librerías
+library(dplyr)
+library(ggplot2)
+
+# 1. Calcular los promedios primero
+df_promedios_nse <- df_ipc %>%
+  group_by(NSE, region) %>%  # (minúscula está bien)
+  summarize(
+    IPC_promedio = mean(IPC, na.rm = TRUE) 
+  ) %>%
+  ungroup() 
+
+# 2. Asegurarse de que el NSE esté en el orden correcto
+df_promedios_nse$NSE <- factor(
+  df_promedios_nse$NSE,
+  levels = c("D1+D2+E", "C2+C3", "ABC1")
+)
+
+# 3. Graficar los promedios (¡CORREGIDO!)
+ggplot(df_promedios_nse, aes(x = NSE, y = IPC_promedio, group = region, color = region)) + # <-- minúsculas
+  geom_line(linewidth = 1) + 
+  geom_point(size = 2) +    
+  labs(
+    title = "IPC Promedio por Nivel Socioeconómico y Región",
+    subtitle = "Interacción entre NSE y Región",
+    x = "Nivel Socioeconómico (NSE)",
+    y = "IPC Promedio"
+  ) +
+  theme_minimal()
+
+
+# 1. Calcular los promedios primero
+df_promedios_nse <- df_ipc %>%
+  group_by(NSE, region) %>%  # <-- AQUÍ USAS "region" (minúscula)
+  summarize(
+    IPC_promedio = mean(IPC, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+# ... (El factor se crea bien) ...
+
+# 3. Graficar los promedios
+ggplot(df_promedios_nse, aes(x = NSE, y = IPC_promedio, group = region, color = region)) + # <-- ERROR AQUÍ
+  geom_line(linewidth = 1) +
+  geom_point(size = 2)
+
